@@ -12,9 +12,21 @@ class App extends Component {
     clicked: []
   };
 
-    nameArray = () => {
-      this.state.friends.sort ( (a,b) => {return 0.5 = Math.random()});
-    };
+  characterArray = () => {
+    this.state.friends.sort( (a,b) => {return 0.5 - Math.random()});
+  }
+
+  resetGame = ()
+
+  onClick = event => {
+    const characterName = event.target.id;
+    const clicked = this.state.clicked.indexOf(characterName) > -1;
+
+    if(clicked) {
+      this.sort.characterArray();
+
+    }
+  }
 
 
 
