@@ -8,8 +8,15 @@ class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
     friends,
-    score: 0
+    score: 0,
+    clicked: []
   };
+
+    nameArray = () => {
+      this.state.friends.sort ( (a,b) => {return 0.5 = Math.random()});
+    };
+
+
 
   // NEED TO ADD: Random sort function
   // Update when a card is clicked with onClick
@@ -31,6 +38,8 @@ class App extends Component {
       </Wrapper>
     );
   }
+
 }
+
 
 export default App;
