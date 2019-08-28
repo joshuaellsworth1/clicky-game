@@ -9,22 +9,39 @@ class App extends Component {
   state = {
     friends,
     score: 0,
-    clicked: []
+    clicked: [],
+    highscore: 0
   };
 
-  characterArray = () => {
+  friendArray = () => {
     this.state.friends.sort( (a,b) => {return 0.5 - Math.random()});
   }
 
-  resetGame = ()
+  resetGame = () => {
+    this.setState({
+      clicked: [],
+      score: 0
+    })
+  };
+
+  highScore = () => {
+    if(this.state.score > this.state.highscore) {
+      this.setState({
+        highscore: this.state.score
+      });
+    }
+  };
 
   onClick = event => {
     const characterName = event.target.id;
     const clicked = this.state.clicked.indexOf(characterName) > -1;
 
     if(clicked) {
-      this.sort.characterArray();
-
+      this.sort.friendArray();
+      this.setState({
+        clicked: this.state.clicked(characterName),
+        score: this.state.score + 1
+      })
     }
   }
 
@@ -42,6 +59,7 @@ class App extends Component {
         <Title>Friends List</Title>
         {this.state.friends.map(friend => (
           <FriendCard
+            score={this.state.score}
             id={friend.id}
             key={friend.id}
             image={friend.image}
