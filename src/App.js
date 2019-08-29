@@ -13,37 +13,37 @@ class App extends Component {
   };
 
   friendArray = () => {
-    this.state.friends.sort( (a,b) => {return 0.5 - Math.random()});
-  }
-
-  resetGame = () => {
-    this.setState({
-      clicked: [],
-      score: 0
-    })
+    this.setState((a, b) => 
+    { return 0.5 - Math.random() });
   };
 
+  resetGame = () => {
+    this.setState({ clicked: [], score: 0 })};
+
   highScore = () => {
-    if(this.state.score > this.state.highscore) {
-      this.setState({
-        highscore: this.state.score
-      });
+    if (this.state.score > this.state.highscore) {
+      this.setState({ highscore: this.state.highscore });
     }
   };
 
   onClick = event => {
-    const characterName = event.target.id;
-    const clicked = this.state.clicked.indexOf(characterName) > -1;
-
-    if(clicked) {
+    const characterName = event.id;
+    const alreadyClicked = this.state.alreadyClicked.indexOf(characterName) > -1;
+    if (alreadyClicked) {
       this.friendArray();
       this.resetGame();
     } else {
       this.friendArray();
       this.setState({
-        clicked: this.state.clicked(characterName),
+        clicked: this.state.alreadyClicked(characterName),
         score: this.state.score + 1
-      })
+      },
+        () => {
+          if (this.state.score === 12) {
+            this.friendArray();
+            this.resetGame();
+          }
+        })
     }
   }
 
@@ -62,6 +62,7 @@ class App extends Component {
         {this.state.friends.map(friend => (
           <FriendCard
             score={this.state.score}
+            highscore={this.state.highscore}
             id={friend.id}
             key={friend.id}
             image={friend.image}
