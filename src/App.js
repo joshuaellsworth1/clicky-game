@@ -5,7 +5,6 @@ import Title from "./components/Title";
 import friends from "./friends.json";
 
 class App extends Component {
-  // Setting this.state.friends to the friends json array
   state = {
     friends,
     score: 0,
@@ -37,7 +36,10 @@ class App extends Component {
     const clicked = this.state.clicked.indexOf(characterName) > -1;
 
     if(clicked) {
-      this.sort.friendArray();
+      this.friendArray();
+      this.resetGame();
+    } else {
+      this.friendArray();
       this.setState({
         clicked: this.state.clicked(characterName),
         score: this.state.score + 1
